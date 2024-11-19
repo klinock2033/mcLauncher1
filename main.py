@@ -22,12 +22,13 @@ class MainWindow(QMainWindow):
         self.label_18.setText("Connecting...")
         #Sidevbar init
         self.sidebar = Sidebar(self)
-        QTimer.singleShot(0, self.sidebar.init_async_tasks)
+        QTimer.singleShot(0, self.init_async_tasks)
         #Heder init
         self.header = Header(self)
 
-
-
+    def init_async_tasks(self):
+        print("Check server status")
+        asyncio.create_task(self.check_server_status())
 
     async def check_server_status(self): # actualizăm funcția pentru a folosi noua logică
         ip = "193.233.80.168"
@@ -40,7 +41,7 @@ class MainWindow(QMainWindow):
             self.label_18.setText("Offline")
             self.label_18.setStyleSheet("color: red; font-size: 30px;")
             print(f"Error: {error}")
-        QTimer.singleShot(3000, self.sidebar.init_async_tasks)
+        QTimer.singleShot(3000, self.init_async_tasks)
 
 
 if __name__ == "__main__":

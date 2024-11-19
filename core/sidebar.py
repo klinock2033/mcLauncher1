@@ -18,9 +18,7 @@ class Sidebar:
         self.set_sidebar_position("open")
 
 
-    def init_async_tasks(self):
-        print("Check server status")
-        asyncio.create_task(self.parent.check_server_status())
+
 
     def set_sidebar_position(self, status):
         """activam dezactivam sidebar"""
