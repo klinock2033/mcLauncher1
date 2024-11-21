@@ -2,6 +2,9 @@ import sys
 from core.server import server_status
 from core.sidebar import Sidebar
 from core.header import Header
+from core.keyList import Keytest
+from core.setings import Setings
+
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
@@ -25,6 +28,11 @@ class MainWindow(QMainWindow):
         QTimer.singleShot(0, self.init_async_tasks)
         #Heder init
         self.header = Header(self)
+        #KEY accaunt init
+        self.keyTest = Keytest(self)
+        #Setings init
+        self.lSetings = Setings(self)
+
 
     def init_async_tasks(self):
         print("Check server status")
