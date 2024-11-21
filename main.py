@@ -4,7 +4,7 @@ from core.sidebar import Sidebar
 from core.header import Header
 from core.keyList import Keytest
 from core.setings import Setings
-
+from core.mod_control import FileControl
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
@@ -32,12 +32,22 @@ class MainWindow(QMainWindow):
         self.keyTest = Keytest(self)
         #Setings init
         self.lSetings = Setings(self)
+        #fileControl init
+        self.fileControl = FileControl(self)
+        self.pushButton_start.clicked.connect(self.startBut)
 
+    def startBut(self):
+        response = self.keyTest.checkKey(self.lineEdit_key.text())
+        print(response)
+        if response:
+            self.sidebar.setLoading()
+            self.fileControl.cautam_directoriul_mods()
+        else:
+            print("invalid key")
 
     def init_async_tasks(self):
         print("Check server status")
         asyncio.create_task(self.check_server_status())
-
     async def check_server_status(self): # actualizăm funcția pentru a folosi noua logică
         ip = "193.233.80.168"
         port = 25565

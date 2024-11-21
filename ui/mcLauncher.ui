@@ -189,6 +189,9 @@ cursor: pointer;</string>
       <property name="text">
        <string>sss</string>
       </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
      </widget>
      <widget class="QLabel" name="label_10">
       <property name="geometry">
@@ -381,22 +384,22 @@ line-height: 18px;</string>
       </property>
       <item>
        <property name="text">
-        <string>2GB</string>
+        <string>2G</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>3GB</string>
+        <string>3G</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>4GB</string>
+        <string>4G</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>6GB</string>
+        <string>6G</string>
        </property>
       </item>
      </widget>

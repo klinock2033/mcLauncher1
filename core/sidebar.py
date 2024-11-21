@@ -17,7 +17,10 @@ class Sidebar:
         self.parent.l_but_sellect.mousePressEvent = lambda event: self.changeSideBarTab(event, "setings")
         self.set_sidebar_position("open")
 
-
+    def setLoading(self):
+        self.set_sidebar_position("close")
+        # Schimbă la tab-ul de load
+        self.tabWidget.setCurrentWidget(self.parent.tab_3)
 
 
     def set_sidebar_position(self, status):
