@@ -2,9 +2,9 @@ import configparser
 import os
 
 config = configparser.ConfigParser()
-setingPatch = 'setings/config.ini'
+settingPatch = 'settings/config.ini'
 
-class Setings:
+class Settings:
     def __init__(self, parent):
         self.parent = parent
         self.comboBox_ram = parent.comboBox_ram
@@ -23,20 +23,26 @@ class Setings:
         self.pushButton_save.clicked.connect(lambda: saveConfig(self.comboBox_ram.currentText()))
 
 def checkConfigExist():
-    if os.path.isfile(setingPatch):
+    try:
+        if not os.path.isdir("settings"):
+            os.makedirs("settings")
+        if os.path.isfile(settingPatch):
 
-        config.read(setingPatch)
-        memory_ram = config['DEFAULT']['memory_ram']
-        print(f"setarile au fost gasite {memory_ram}")
-        return memory_ram
-    else:
-        print("setarile nu au fost gasite")
-        config['DEFAULT'] = {'memory_ram': '4G'}
-        with open(setingPatch, "w") as configfile:
-            config.write(configfile)
+            config.read(settingPatch)
+            memory_ram = config['DEFAULT']['memory_ram']
+            print(f"setarile au fost gasite {memory_ram}")
+            return memory_ram
+        else:
+            print("setarile nu au fost gasite")
+            config['DEFAULT'] = {'memory_ram': '4G'}
+            with open(settingPatch, "w") as configfile:
+                config.write(configfile)
 
-        return "4G"
+            return "4G"
+    except Exception as e:
+        print(e)
+
 def saveConfig(ram_x):
     config['DEFAULT'] = {'memory_ram': ram_x}
-    with open(setingPatch, "w") as configfile:
+    with open(settingPatch, "w") as configfile:
         config.write(configfile)

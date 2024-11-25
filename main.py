@@ -3,7 +3,7 @@ from core.server import server_status
 from core.sidebar import Sidebar
 from core.header import Header
 from core.keyList import Keytest
-from core.setings import Setings
+from core.settings import Settings
 from core.mod_control import FileControl
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt
@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         #KEY accaunt init
         self.keyTest = Keytest(self)
         #Setings init
-        self.lSetings = Setings(self)
+        self.lSetings = Settings(self)
         #fileControl init
         self.fileControl = FileControl(self)
         self.pushButton_start.clicked.connect(self.startBut)
@@ -41,7 +41,8 @@ class MainWindow(QMainWindow):
         print(response)
         if response:
             self.sidebar.setLoading()
-            self.fileControl.cautam_directoriul_mods()
+            asyncio.create_task(self.fileControl.cautam_directoriul_mods())
+
         else:
             print("invalid key")
 
@@ -59,7 +60,14 @@ class MainWindow(QMainWindow):
             self.label_18.setText("Offline")
             self.label_18.setStyleSheet("color: red; font-size: 30px;")
             print(f"Error: {error}")
-        QTimer.singleShot(3000, self.init_async_tasks)
+
+        index = self.tabWidget.currentIndex()
+        current_tab = self.tabWidget.tabText(index)
+        if current_tab == "Tab 2":
+            print(f"Check server done!")
+            return False
+        else:
+            QTimer.singleShot(3000, self.init_async_tasks)
 
 
 if __name__ == "__main__":

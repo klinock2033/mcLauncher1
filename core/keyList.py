@@ -9,7 +9,7 @@ accKey = {
     "AAA4": "test",
 }
 
-setingPatch = 'setings/config.ini'
+setingPatch = 'settings/config.ini'
 class Keytest:
     def __init__(self, parent):
         self.parent = parent
